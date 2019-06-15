@@ -1,0 +1,70 @@
+@import "mixin";
+$w:600px;
+$r:20px;
+$num:15;
+.box{
+  width: $w;
+  height: $w;
+  background: rgba(259,221,249,0.8);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F273c7d,endColorstr=#7F273c7d);
+  @include center;
+}
+.chess{
+  width: $r * 2;
+  height: $r * 2;
+  border-radius: 50%;
+  float: left;
+  position: relative;
+  z-index:999;
+}
+.black{
+  background: black;
+
+}
+.white{
+  background: white;
+}
+.heng{
+  width: $w - $r*2;
+  height: 1px;
+  background: #4f5b64;
+  position: absolute;
+  left: $r;
+  transform:translate3d(-300%,0,0);
+  animation: through 1s 1 ease-in forwards;
+}
+.shu{
+  height: $w - $r*2;
+  width: 1px;
+  background: #4f5b64;
+  position: absolute;
+  top: $r;
+  transform:translate3d(0,-300%,0);
+  animation: down 1s 1 ease-in forwards;
+}
+@for $i from 1 through 15{
+  .heng:nth-of-type(#{$i}){
+    top:$r *(2*$i - 1);
+    animation-delay: 100ms * $i;
+  }
+  .shu:nth-of-type(#{$i}){
+    left:$r *(2*$i - 1);
+    animation-delay: 100ms * $i;
+  }
+}
+@keyframes down {
+  from{
+    transform:translate3d(0,-300%,0);
+  }
+  to{
+    transform:translate3d(0,0,0);
+  }
+}
+@keyframes through {
+  from{
+    transform:translate3d(-300%,0,0);
+  }
+  to{
+    transform:translate3d(0,0,0);
+  }
+}
